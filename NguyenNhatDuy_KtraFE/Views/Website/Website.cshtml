@@ -1,0 +1,856 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tiki - Điện Thoại Máy Tính Bảng</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: whitesmoke;
+            color: black;
+        }
+
+        .top {
+            height: 30px;
+            background: lightgreen;
+            color: green;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        header {
+            background: white;
+        }
+
+        .header {
+            width: 1200px;
+            margin: auto;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            width: 120px;
+            color: royalblue;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .logo small {
+            display: block;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .search {
+            height: 42px;
+            width: 600px;
+            border: 1px solid lightgray;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search i {
+            margin-left: 15px;
+            color: gray;
+        }
+
+        .search input {
+            flex: 1;
+            height: 100%;
+            border: none;
+            outline: none;
+            padding: 0 12px;
+        }
+
+        .search button {
+            height: 100%;
+            width: 90px;
+            background: white;
+            color: royalblue;
+            border: none;
+            border-left: 1px solid lightgray;
+            cursor: pointer;
+        }
+
+        .header-menu {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+
+            color: #555;
+            font-size: 13px;
+        }
+
+        .header-menu i {
+            color: #087cff;
+        }
+
+        .suggestions {
+            width: 1200px;
+            margin: auto;
+            padding-left: 120px;
+            padding-bottom: 10px;
+            color: gray;
+            font-size: 11px;
+        }
+
+        .benefits {
+            border-top: 1px solid lightgray;
+            width: 1200px;
+            height: 40px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+
+        .benefits i {
+            color: royalblue;
+            margin-right: 5px;
+        }
+
+        .container {
+            width: 1200px;
+            margin: auto;
+        }
+
+        .breadcrumb {
+            font-size: 11px;
+            color: gray;
+            padding: 15px 0;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 12px;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .sidebar h3 {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 9px 3px;
+            border-bottom: 1px solid lightgray;
+            font-size: 11px;
+            color: gray;
+            text-decoration: none;
+        }
+
+        .side-product {
+            margin-top: 12px;
+            background: white;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .side-product img {
+            width: 100px;
+            height: 120px;
+            object-fit: contain;
+        }
+
+        .side-product h4 {
+            font-size: 10px;
+            line-height: 15px;
+        }
+        .side-product .stars {
+            color: orange;
+            font-size: 9px;
+            margin-top: 5px;
+        }
+
+        .side-product .price {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 7px 0;
+        }
+
+        .side-product button {
+            border: none;
+            background: royalblue;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-size: 9px;
+        }
+
+        .main {
+            min-width: 0;
+        }
+
+        .title {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .banner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .category {
+            margin-top: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .category h2 {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .category-list {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .category-item {
+            text-align: center;
+            width: 130px;
+        }
+
+        .category-item img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: lightgray;
+        }
+
+        .category-item p {
+            margin-top: 7px;
+            font-size: 9px;
+        }
+
+        .product-section {
+            margin-top: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .product-section h2 {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .filters button {
+            background: white;
+            border: 1px solid lightgray;
+            border-radius: 15px;
+            padding: 7px 12px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .filters button:hover {
+            color: royalblue;
+            border-color: royalblue;
+        }
+
+        .sub-filter {
+            margin: 15px 0;
+            display: flex;
+            gap: 20px;
+            font-size: 10px;
+            align-items: center;
+        }
+
+        .sort {
+            margin-left: auto;
+        }
+
+        .sort button {
+            border: 1px solid lightgray;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .product {
+            border: 1px solid lightgray;
+            border-radius: 6px;
+            overflow: hidden;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .product:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 190px;
+            background: lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 10px;
+        }
+
+        .brand {
+            color: gray;
+            font-size: 8px;
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-size: 11px;
+            line-height: 16px;
+            height: 34px;
+        }
+
+        .stars {
+            color: orange;
+            font-size: 10px;
+            margin-top: 6px;
+        }
+
+        .sold {
+            color: gray;
+            margin-left: 5px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 7px;
+        }
+
+        .sale {
+            color: red;
+        }
+
+        .old-price {
+            color: gray;
+            font-size: 8px;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+
+        .tag {
+            display: inline-block;
+            border: 1px solid lightgray;
+            border-radius: 3px;
+            font-size: 8px;
+            color: gray;
+            padding: 3px 5px;
+            margin-top: 8px;
+        }
+
+        .shipping {
+            border-top: 1px solid lightgray;
+            margin-top: 8px;
+            padding-top: 8px;
+            color: red;
+            font-size: 8px;
+        }
+
+        media(max-width: 1000px) {
+            .header,
+            .suggestions,
+            .benefits,
+            .container {
+                width: 95%;
+            }
+
+            .search {
+                width: auto;
+            }
+        }
+
+        media(max-width: 700px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .banner {
+                grid-template-columns: 1fr;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-menu {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top">
+        Freeship đơn từ 45K,
+        giảm nhiều hơn cùng
+        <b>FREESHIP XTRA</b>
+    </div>
+
+    <header>
+        <div class="header">
+            <div class="logo">
+                TIKI
+                <small>Tốt & Nhanh</small>
+            </div>
+
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Gia siêu rẻ">
+                <button onclick="search()">Tìm kiếm</button>
+            </div>
+
+            <div class="header-menu">
+                <span><i class="fas fa-home"></i>Trang chủ</span>
+                <span><i class="far fa-user"></i>Tài khoản</span>
+                <span><i class="fas fa-shopping-cart"></i></span>
+            </div>
+        </div>
+
+        <div class="suggestions">
+            điện gia dụng
+            &nbsp; xe cộ
+            &nbsp; mẹ & bé
+            &nbsp; khỏe đẹp
+            &nbsp; nhà cửa
+            &nbsp; sách
+            &nbsp; thể thao
+            &nbsp; iphone 13
+            &nbsp; điện thoại
+            &nbsp; ipad air 5
+            &nbsp; oppo a17k
+        </div>
+
+        <div class="benefits">
+            <span><i class="fas fa-check-circle"></i>100% hàng thật</span>
+            <span><i class="fas fa-sync"></i>Hoàn 200% nếu hàng giả</span>
+            <span><i class="fas fa-truck"></i>30 ngày đổi trả</span>
+            <span><i class="fas fa-shipping-fast"></i>Giao nhanh 2h</span>
+            <span><i class="fas fa-tag"></i>Giá siêu rẻ </span>
+            <span><i class="fas fa-truck"></i>Freeship mọi đơn</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">Trang chủ > Điện Thoại - Máy Tính Bảng</div>
+        <div class="layout">
+            <aside class="sidebar">
+                <h3>Khám phá danh mục</h3>
+                <a>Điện thoại Smartphone</a>
+                <a>Máy tính bảng</a>
+                <a>Máy đọc sách</a>
+                <a>Điện thoại phổ thông</a>
+                <a>Điện thoại bàn</a>
+
+                <div class="side-product">
+                    <img
+                        src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-tu-nhien.png"
+                        alt="iPhone 16 Pro Max">
+
+                    <h4>
+                        Apple iPhone 16 Pro Max
+                        Titan Tự Nhiên - 512GB
+                    </h4>
+
+                    <div class="stars">
+                        ★★★★★
+                        <span>Đã bán 95</span>
+                    </div>
+
+                    <div class="price">
+                        40.990.000 ₫
+                    </div>
+
+                    <button>
+                        Xem thêm
+                    </button>
+                </div>
+
+                <div class="side-product">
+                    <img
+                        src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-titan-tu-nhien_1_1.png"
+                        alt="iPhone 16 Pro">
+
+                    <h4>
+                        Apple iPhone 16 Pro
+                        Titan Tự Nhiên - 128GB
+                    </h4>
+
+                    <div class="stars">
+                        ★★★★★
+                        <span>Đã bán 48</span>
+                    </div>
+
+                    <div class="price">
+                        28.990.000 ₫
+                    </div>
+
+                    <button>
+                        Xem thêm
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main">
+                <h1 class="title">Điện Thoại - Máy Tính Bảng</h1>
+
+                <div class="banner">
+                    <img
+                        src="https://images.unsplash.com/photo-1592286927505-1def25115558?auto=format&fit=crop&w=1000&q=80"
+                        alt="iPhone">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80"
+                        alt="Điện thoại">
+                </div>
+
+                <section class="category">
+                    <h2>Khám phá theo danh mục</h2>
+
+                    <div class="category-list">
+                        <div class="category-item">
+                            <img
+                                src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone15-pro-max-titan-nau.jpg"
+                                alt="Smartphone">
+
+                            <p>Điện thoại Smartphone</p>
+                        </div>
+
+                        <div class="category-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=300&q=80"
+                                alt="Tablet">
+
+                            <p>Máy tính bảng</p>
+                        </div>
+
+                        <div class="category-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80"
+                                alt="Book">
+
+                            <p>Máy đọc sách</p>
+                        </div>
+
+                        <div class="category-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=300&q=80"
+                                alt="Phone">
+
+                            <p>Điện thoại phổ thông</p>
+                        </div>
+
+                        <div class="category-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=300&q=80"
+                                alt="Telephone">
+
+                            <p>Điện thoại bàn</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="product-section">
+                    <h2>Tất cả sản phẩm</h2>
+
+                    <div class="filters">
+                        <button>ROM</button>
+                        <button>128GB</button>
+                        <button>256GB</button>
+                        <button>64GB</button>
+                        <button>32GB</button>
+                        <button>Thương hiệu</button>
+                        <button>Samsung</button>
+                        <button>Xiaomi</button>
+                        <button>OPPO</button>
+                        <button>Panasonic</button>
+                        <button><i class="fas fa-filter"></i>Tất cả</button>
+                    </div>
+
+                    <div class="sub-filter">
+                        <span>
+                            🆕 Giao siêu tốc 2H
+                        </span>
+
+                        <span>
+                            🔥 TOP DEAL
+                        </span>
+
+                        <span>
+                            ⚡ FREESHIP XTRA
+                        </span>
+
+                        <span>
+                            ⭐ từ 4 sao
+                        </span>
+
+
+                        <div class="sort">
+                            Sắp xếp:
+                            <button>
+                                Phổ biến ⌄
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="products">
+                        <div class="product">
+                            <div class="product-image">
+                                <img
+                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-titan-sa-mac_3.png"
+                                    alt="iPhone 16 Pro Max">
+                            </div>
+
+                            <div class="product-info">
+                                <div class="brand">
+                                    APPLE
+                                </div>
+
+                                <div class="product-name">
+                                    Apple iPhone 16 Pro Max
+                                </div>
+
+                                <div class="stars">
+                                    ★★★★★
+                                    <span class="sold">
+                                        Đã bán 95
+                                    </span>
+                                </div>
+
+                                <div class="product-price">
+                                    40.990.000₫
+                                </div>
+
+                                <span class="tag">
+                                    1 Màu sắc
+                                </span>
+
+                                <span class="tag">
+                                    1 Dung lượng
+                                </span>
+
+                                <div class="shipping">
+                                    NOW Giao siêu tốc 2h
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="product-image">
+                                <img
+                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-titan-den_3.png"
+                                    alt="iPhone 16 Pro">
+                            </div>
+
+                            <div class="product-info">
+                                <div class="brand">
+                                    APPLE
+                                </div>
+
+                                <div class="product-name">
+                                    Apple iPhone 16 Pro
+                                </div>
+
+                                <div class="stars">
+                                    ★★★★★
+                                    <span class="sold">
+                                        Đã bán 48
+                                    </span>
+                                </div>
+
+                                <div class="product-price">
+                                    31.990.000₫
+                                </div>
+
+                                <span class="tag">
+                                    2 Màu sắc
+                                </span>
+
+                                <span class="tag">
+                                    2 Dung lượng
+                                </span>
+
+                                <div class="shipping">
+                                    NOW Giao siêu tốc 2h
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="product-image">
+                                <img
+                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-plus-xanh-mong-ket.png"
+                                    alt="iPhone 16 Xanh Mòng Két">
+                            </div>
+
+                            <div class="product-info">
+                                <div class="brand">
+                                    APPLE
+                                </div>
+
+                                <div class="product-name">
+                                    Apple iPhone 16 -
+                                    Xanh Mòng Két - 256GB
+                                </div>
+
+                                <div class="stars">
+                                    ★★★★★
+                                    <span class="sold">
+                                        Đã bán 15
+                                    </span>
+                                </div>
+
+                                <div class="product-price sale">
+                                    25.490.000₫
+                                    <span class="old-price">
+                                        25.990.000₫
+                                    </span>
+                                </div>
+
+                                <span class="tag">
+                                    5 Màu
+                                </span>
+
+                                <span class="tag">
+                                    2 Dung lượng
+                                </span>
+
+                                <div class="shipping">
+                                    NOW Giao siêu tốc 2h
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="product-image">
+                                <img
+                                    src="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-1.png"
+                                    alt="iPhone 16 Plus">
+                            </div>
+
+                            <div class="product-info">
+                                <div class="brand">
+                                    APPLE
+                                </div>
+
+                                <div class="product-name">
+                                    Apple iPhone 16 Plus
+                                </div>
+
+                                <div class="stars">
+                                    ★★★★★
+                                    <span class="sold">
+                                        Đã bán 12
+                                    </span>
+                                </div>
+
+                                <div class="product-price sale">
+                                    25.990.000₫
+                                </div>
+
+                                <span class="tag">
+                                    3 Màu
+                                </span>
+
+                                <span class="tag">
+                                    2 Dung lượng
+                                </span>
+
+                                <div class="shipping">
+                                    NOW Giao siêu tốc 2h
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script language="JavaScript">
+        function search() {
+            let keyword =
+                document.getElementById("search").value;
+            if (keyword.trim() === "") {
+                alert("Vui lòng nhập sản phẩm cần tìm!");
+            } else {
+                alert(
+                    "Bạn đang tìm kiếm: "
+                    + keyword
+                );
+            }
+        }
+    </script>
+</body>
+</html>
